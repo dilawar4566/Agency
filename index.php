@@ -13,26 +13,26 @@
             $args = array(
                 'post_type' => 'service',
             );
+          
             $services = get_posts($args);
             global $post;
             if (!empty($services)) {
 
                 foreach ($services as $post) {
+                   
 
-                    
-                        // modify the $post variable with the post data you want. Note that this variable must have this name!
+                    // modify the $post variable with the post data you want. Note that this variable must have this name!
 
-                        setup_postdata($post); ?>
+                    setup_postdata($post); ?>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-<?php the_field('service_post') ?> fa-stack-1x fa-inverse"></i>
                         </span>
-                       
-                            <h4 class="my-3"><?php the_title(); ?></h4>
-                            <p class="text-muted"><?php the_content(); ?></p>
-                            <?php the_post_thumbnail('thumbnail');  ?>
-                        
+                        <h4 class="my-3"><?php the_title(); ?></h4>
+                        <p class="text-muted"><?php the_content(); ?></p>
+                        <?php the_post_thumbnail('thumbnail');  ?>
+
                     </div>
 
 
@@ -60,12 +60,14 @@
             $args = array();
             $my_posts = get_posts($args);
             global $post;
+            $i=0;
             if (!empty($my_posts)) {
 
                 foreach ($my_posts as $post) {
                     setup_postdata($post);
-            ?>
-                    <li>
+                    if (($i % 2) == 0) {
+?>
+                        <li>
                         <div class="timeline-image"><img class="rounded-circle img-fluid" src="<?php the_post_thumbnail_url(); ?>" alt="" /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
@@ -77,7 +79,26 @@
                             </div>
                         </div>
                     </li>
+<?php 
+                    }
+                    else{
+                        ?>
 
+                        <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="<?php the_post_thumbnail_url(); ?>" alt="" /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>March 2011</h4>
+                                <h4 class="subheading"><?php the_title();?> </h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted"><?php the_content(); ?></p></div>
+                        </div>
+                    </li>
+<?php
+                    }
+                    $i++;
+            ?>
+                   
 
             <?php
                     wp_reset_postdata();
@@ -107,6 +128,3 @@
 <!-- Footer-->
 
 <?php get_footer(); ?>
-</body>
-
-</html>
