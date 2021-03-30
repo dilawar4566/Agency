@@ -19,7 +19,7 @@
 
                 foreach ($services as $post) {
 
-                    if ($i % 2 == 0)
+                    
                         // modify the $post variable with the post data you want. Note that this variable must have this name!
 
                         setup_postdata($post); ?>
